@@ -124,7 +124,30 @@ class MyFrame(wx.Frame):
             self.mpvAudio.play(self.url1)
             self.playing = True
     
-    def recStartStop(self,e):
+    def getUrl(self):
+        myurl = self.url1
+        # qmpos = myurl.find("?")
+        # if qmpos != -1:
+        #     myurl = myurl[0:qmpos]
+        r = requests.get(urlIn)
+        c = r.content.decode("utf-8")
+        lastslash = myurl.find("/")
+        baseurl = myurl[0:lastslash]
+        baseurl = baseurl + "/"
+        sep = "\n"
+        if "\r\n" in c:
+            sep = "\r\n"
+        c= c.split(sep)
+        for j in c:
+            if j.endswith(".m3u8"):
+                if not j.startswith("http")
+                    self.url1 = baseurl + j
+                else:
+                    self.url1 = j
+                getUrl(self)
+        return c
+
+    def rec(self,e):
             if not self.recording:
                 r= requests.get(self.url1, stream=True)
                 try:
