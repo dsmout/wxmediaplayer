@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-import wx  # wx.media
+import wx
 import os
 import mpv
 import requests
