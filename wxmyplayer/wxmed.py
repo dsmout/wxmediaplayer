@@ -5,6 +5,7 @@ import mpv
 import requests
 import time
 import subprocess
+import mutagen
 
 class MyFrame(wx.Frame):
 # derive frame class
