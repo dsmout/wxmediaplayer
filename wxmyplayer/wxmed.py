@@ -28,6 +28,7 @@ class MyFrame(wx.Frame):
         self.elapsed = ""
         self.recFile = None
         self.recording = False
+        self.probe =None
         btn = wx.Button()
 
         @self.mpvAudio.property_observer('time-pos')
@@ -72,9 +73,6 @@ class MyFrame(wx.Frame):
         # menuStop = filemenu.Append(wx.ID_STOP, "&Stop" ,"Stop")
         menuPlay = filemenu.Append(wx.ID_ANY, "&Play", "Play")
         menuRec = filemenu.Append(wx.ID_ANY,"&Rec", "Record")
-        # menuRstop = filemenu.Append(wx.ID_ANY,"&RecS", "Rstop")
-
-       
 
         # menubar
         mb = wx.MenuBar()
@@ -173,9 +171,14 @@ class MyFrame(wx.Frame):
                 newChunk = reqNewChunk.content
                 self.recFile.write(newChunk) 
 
-    def recNorm(self):
+    def myProber(self):
         fp = subprocess.check_output(["ffprobe",self.url1],stderr=subprocess.STDOUT)
         fp = fp.decode("utf-8")
+        self.probe = fp
+
+
+    def recNorm(self):
+        fp = self.probe
         fName = ""
         if "Audio: aac" in fp:
             fName = "stream97.aac"
