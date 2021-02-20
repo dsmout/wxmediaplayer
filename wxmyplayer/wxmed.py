@@ -33,7 +33,6 @@ class MyFrame(wx.Frame):
 
         @self.mpvAudio.property_observer('time-pos')
         def time_observer(name,val):
-
             try:
                 wholeSecs = round(val)
             except:
